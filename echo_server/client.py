@@ -15,8 +15,9 @@ while connected:
     msg = bytes(input("Enter your message: "), FORMAT)
     client.send(msg)
     response = client.recv(1024).decode(FORMAT)
-    print(f"echo_server: {response}")
     if response == DISCONNECT_MSG:
         connected = False
+        response = 'Thank you for using echo server!'
+    print(f"echo_server: {response}")
 client.close()
 print(f"[DISCONNECTED...]")
