@@ -30,6 +30,6 @@ def echo_client(client, addr):
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(SERVER_ADDR)
 print(f"[BINDING SERVER]... {HOST}")
+server.bind(SERVER_ADDR)
 run_server()
