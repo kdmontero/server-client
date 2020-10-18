@@ -1,11 +1,13 @@
 import socket
+import time
 
-PORT = 5562
+PORT = 5564
 HOST = socket.gethostbyname(socket.gethostname())
 SERVER_ADDR = (HOST, PORT)
 FORMAT = 'utf-8'
-HEADER = 16
+MSG_SIZE = 1024
 DISCONNECT_MSG = 'exit()'
+TIMEOUT = 5
 
 def run_server():
     server.listen()
@@ -14,17 +16,30 @@ def run_server():
     print(f"[CONNECTED SUCCESSFULLY] {addr[0]}")
     echo_client(client, addr)
 
+
+def send_msg(message, client): # message --> string
+    global FORMAT
+    msg = message.encode(FORMAT)
+    client.send(msg)
+
+
+def receive_msg(client):
+    global MSG_SIZE
+    global FORMAT
+    msg_string = client.recv(MSG_SIZE).decode(FORMAT)
+    return msg_string
+
+
 def echo_client(client, addr):
     connected = True
     while connected:
         print(f"[WAITING FOR INPUT...]")
-        # msg_length = int(client.recv(HEADER).decode(FORMAT))
-        msg = client.recv(1024)
-        msg_string = msg.decode(FORMAT)
+        msg_string = receive_msg(client)
         if msg_string == DISCONNECT_MSG:
             connected = False
         print(f"[MESSAGE RECEIVED:] \n{msg_string}")
-        client.send(msg)
+        send_msg(msg_string, client)
+
     client.close()
     print(f"[DISCONNECTED...] {addr[0]}")
 
