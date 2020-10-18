@@ -3,18 +3,18 @@ import socket
 FORMAT = 'utf-8'
 MSG_SIZE = 1024
 PORT = 5564
-HOST = '192.168.22.19'
+HOST = '192.168.22.19' # change this into IP of the server
 SERVER_ADDR = (HOST, PORT)
 DISCONNECT_MSG = 'exit()'
 
 
-def send_msg(message, client): # message --> string
+def send_msg(message, client): # message in string format
     global FORMAT
     msg = message.encode(FORMAT)
     client.send(msg)
 
 
-def receive_msg(client):
+def receive_msg(client): # receives message in bytes and turns into string
     global MSG_SIZE
     global FORMAT
     msg_string = client.recv(MSG_SIZE).decode(FORMAT)
