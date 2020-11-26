@@ -1,7 +1,7 @@
 import socket
 import time
 
-PORT = 5564
+PORT = 5571
 HOST = socket.gethostbyname(socket.gethostname())
 SERVER_ADDR = (HOST, PORT)
 FORMAT = 'utf-8'

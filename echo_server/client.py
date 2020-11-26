@@ -1,9 +1,10 @@
 import socket
+from private import SERVER_HOST
 
 FORMAT = 'utf-8'
 MSG_SIZE = 1024
-PORT = 5564
-HOST = '192.168.22.19' # change this into IP of the server
+PORT = 5571
+HOST = SERVER_HOST
 SERVER_ADDR = (HOST, PORT)
 DISCONNECT_MSG = 'exit()'
 
